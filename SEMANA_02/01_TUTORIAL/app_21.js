@@ -4,7 +4,7 @@ const app = express();
 const hostname = '127.0.0.1';
 const port = 3021;
 const sqlite3 = require('sqlite3').verbose();
-const DBPATH = 'projeto.db';
+const DBPATH = './projeto.db';
 
 app.use(express.json());
 
@@ -61,7 +61,69 @@ app.get('/alocacoes', (req, res) => {
 	});
 	db.close(); // Fecha o banco
 });
+app.get('/soma',(req,res) =>{
+	res.statusCode = 200; 
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+  var sql = "SELECT qtde_horas \
+             FROM alocacao \
+             ";
+	db.all(sql, [],  (err, rows ) => {
+		if (err) {
+		    throw err;
+		}
+		const valor =  rows ;
+		let soma = 0 
+		valor.forEach(value => soma+=(value.qtde_horas))
+		console.log(soma)
+		res.json({
+			soma_carga_horaria:soma
+		})
+
+	});
+	db.close(); // Fecha o banco
+})
+app.get('/media',(req,res) =>{
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+  var sql = "SELECT AVG(qtde_horas) as média \
+             FROM alocacao \
+			 ";
+	db.all(sql, [],  (err, rows ) => {
+		if (err) {
+		    throw err;
+		}
+		const valor =  rows ;
+		res.json({
+			valor
+		})
+
+	});
+	db.close(); // Fecha o banco
+})
+app.get('/add',(req,res) =>{
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
+
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+  var sql = "INSERT INTO 'usuario' VALUES (222,333,'2-2-2','2 1') \
+              \
+			 ";
+	db.all(sql, [],  (err, rows ) => {
+		if (err) {
+		    throw err;
+		}
+		const valor =  rows ;
+		res.json({
+			valor
+		})
+
+	});
+	db.close(); // Fecha o banco
+})
 
 /* Inicia o servidor */
 app.listen(port, hostname, () => {
