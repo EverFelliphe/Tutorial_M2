@@ -4,13 +4,15 @@ CREATE TABLE Contatos (
 	email                VARCHAR(255) NOT NULL    ,
 	numero_fixo          INTEGER     ,
 	id_pessoa            INTEGER NOT NULL    ,
-	CONSTRAINT pk_Contatos PRIMARY KEY ( id_contato, id_pessoa ),
+	PRIMARY KEY (id_contato AUTOINCREMENT),
+    CONSTRAINT FK_Contatos FOREIGN KEY (id_pessoa)
+    REFERENCES Pessoa(id_pessoa),
 	CONSTRAINT unq_Contatos UNIQUE ( email )
  );
 
 CREATE TABLE Pessoa ( 
 	nome                 VARCHAR(255) NOT NULL    ,
-	id_pessoa            INTEGER NOT NULL  PRIMARY KEY  ,
+	id_pessoa            INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
 	sobrenome            VARCHAR(255) NOT NULL    ,
 	idade                INTEGER NOT NULL    ,
 	endereco             VARCHAR(255) NOT NULL    ,
@@ -27,7 +29,9 @@ CREATE TABLE competencia (
 	soft_skill           BOOLEAN NOT NULL    ,
 	competencia          BOOLEAN NOT NULL    ,
 	nivel_competencia    INTEGER     ,
-	CONSTRAINT pk_competencia PRIMARY KEY ( id_competencia, id_pessoa )
+	PRIMARY KEY (id_competencia AUTOINCREMENT),
+    CONSTRAINT FK_competencia FOREIGN KEY (id_pessoa)
+    REFERENCES Pessoa(id_pessoa)
  );
 
 CREATE TABLE experiencia_profissional ( 
@@ -37,7 +41,9 @@ CREATE TABLE experiencia_profissional (
 	cargo                VARCHAR(255) NOT NULL    ,
 	descricao_atividades VARCHAR(255)     ,
 	periodo_permanencia  VARCHAR(255) NOT NULL    ,
-	CONSTRAINT pk_experiencia_profissional PRIMARY KEY ( id_experiencia, id_pessoa )
+	PRIMARY KEY (id_experiencia AUTOINCREMENT),
+    CONSTRAINT FK_experiencia_profissional FOREIGN KEY (id_pessoa)
+    REFERENCES Pessoa(id_pessoa)
  );
 
 CREATE TABLE formacao_academica ( 
@@ -48,5 +54,7 @@ CREATE TABLE formacao_academica (
 	tipo_formacao        VARCHAR(255) NOT NULL    ,
 	inicio               VARCHAR(255) NOT NULL    ,
 	termino              VARCHAR(255) NOT NULL    ,
-	CONSTRAINT pk_formacao_academica PRIMARY KEY ( id_formacao, pessoa_id )
+	PRIMARY KEY (id_formacao AUTOINCREMENT),
+    CONSTRAINT FK_formacao_academica FOREIGN KEY (pessoa_id)
+    REFERENCES Pessoa(id_pessoa)
  );

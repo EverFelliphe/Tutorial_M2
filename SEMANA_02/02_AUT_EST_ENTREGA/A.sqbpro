@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Inteli/Documents/GitHub/módulo 2/Nova pasta/Tutorial_M2/SEMANA_02/02_AUT_EST_ENTREGA/A.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="3995"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:mainContatos"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Contatos ( 
+	numero_celular       INTEGER NOT NULL    ,
+	id_contato           INTEGER NOT NULL    ,
+	email                VARCHAR(255) NOT NULL    ,
+	numero_fixo          INTEGER     ,
+	id_pessoa            INTEGER NOT NULL    ,
+	PRIMARY KEY (id_contato AUTOINCREMENT),
+    CONSTRAINT FK_Contatos FOREIGN KEY (id_pessoa)
+    REFERENCES Pessoa(id_pessoa),
+	CONSTRAINT unq_Contatos UNIQUE ( email )
+ );
+
+CREATE TABLE Pessoa ( 
+	nome                 VARCHAR(255) NOT NULL    ,
+	id_pessoa            INTEGER NOT NULL  PRIMARY KEY AUTOINCREMENT ,
+	sobrenome            VARCHAR(255) NOT NULL    ,
+	idade                INTEGER NOT NULL    ,
+	endereco             VARCHAR(255) NOT NULL    ,
+	CONSTRAINT idade UNIQUE ( idade ),
+	CONSTRAINT unq_Pessoa_nome UNIQUE ( nome ),
+	CONSTRAINT unq_Pessoa UNIQUE ( sobrenome ),
+	CONSTRAINT unq_Pessoa_0 UNIQUE ( endereco )
+ );
+
+CREATE TABLE competencia ( 
+	id_competencia       INTEGER NOT NULL    ,
+	id_pessoa            INTEGER NOT NULL    ,
+	hard_skill           BOOLEAN NOT NULL    ,
+	soft_skill           BOOLEAN NOT NULL    ,
+	competencia          BOOLEAN NOT NULL    ,
+	nivel_competencia    INTEGER     ,
+	PRIMARY KEY (id_competencia AUTOINCREMENT),
+    CONSTRAINT FK_competencia FOREIGN KEY (id_pessoa)
+    REFERENCES Pessoa(id_pessoa)
+ );
+
+CREATE TABLE experiencia_profissional ( 
+	id_experiencia       INTEGER NOT NULL    ,
+	id_pessoa            INTEGER NOT NULL    ,
+	empresa              VARCHAR(255) NOT NULL    ,
+	cargo                VARCHAR(255) NOT NULL    ,
+	descricao_atividades VARCHAR(255)     ,
+	periodo_permanencia  VARCHAR(255) NOT NULL    ,
+	PRIMARY KEY (id_experiencia AUTOINCREMENT),
+    CONSTRAINT FK_experiencia_profissional FOREIGN KEY (id_pessoa)
+    REFERENCES Pessoa(id_pessoa)
+ );
+
+CREATE TABLE formacao_academica ( 
+	id_formacao          INTEGER NOT NULL    ,
+	pessoa_id            INTEGER NOT NULL    ,
+	nome_curso           VARCHAR(255) NOT NULL    ,
+	instituicao          VARCHAR(255) NOT NULL    ,
+	tipo_formacao        VARCHAR(255) NOT NULL    ,
+	inicio               VARCHAR(255) NOT NULL    ,
+	termino              VARCHAR(255) NOT NULL    ,
+	PRIMARY KEY (id_formacao AUTOINCREMENT),
+    CONSTRAINT FK_formacao_academica FOREIGN KEY (pessoa_id)
+    REFERENCES Pessoa(id_pessoa)
+ );
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
