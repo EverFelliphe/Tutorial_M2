@@ -66,7 +66,7 @@ app.get('/soma',(req,res) =>{
 	res.setHeader('Access-Control-Allow-Origin', '*'); // Isso é importante para evitar o erro de CORS
 
 	var db = new sqlite3.Database(DBPATH); // Abre o banco
-  var sql = "SELECT qtde_horas \
+  	var sql = "SELECT qtde_horas \
              FROM alocacao \
              ";
 	db.all(sql, [],  (err, rows ) => {
