@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button class="criar">criar curriculo</button>
+        <button class="ver">ver curriculo</button>
+    
+    </div>
+    <script>
+        document.addEventListener('click', e =>{
+            const target = e.target
+            if(target.classList.contains('ver')){
+                window.location.href = 'http://localhost:3000/ver'
+            }
+            if(target.classList.contains('criar')){
+                window.location.href = 'http://localhost:3000/criar'
+            }
+        })
+    </script>
+</body>
+</html>
