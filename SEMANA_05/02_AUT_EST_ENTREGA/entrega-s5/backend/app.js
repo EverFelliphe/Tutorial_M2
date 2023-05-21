@@ -7,26 +7,26 @@ const DBPATH = resolve(__dirname,'..','data','CURRICULO.db')
 const port = 3000
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-app.use(express.static(resolve(__dirname, "../")))
+app.use(express.static(resolve(__dirname, "../frontend")))
 app.get('/',(req,res)=>{
-    res.redirect('frontend/index.html?teste=1')
+    res.redirect('index.html?teste=1')
 })
 app.get('/criar',(req,res)=>{
-    res.redirect('frontend/teste.html')
+    res.redirect('teste.html')
 })
 app.get('/ver',(req,res)=>{
-    res.redirect('frontend/ver_curriculo.html')
+    res.redirect('ver_curriculo.html')
 })
 app.get('/final',(req,res)=>{
-    res.redirect('frontend/final.html')
+    res.redirect('final.html')
 })
 app.get('/experiencia/:id',(req,res)=>{
     const{id}=req.params
-    res.redirect(`/frontend/experiencia.html?id=${id}`)
+    res.redirect(`experiencia.html?id=${id}`)
 })
 app.get('/formacao/:nome',(req,res)=>{
     const{nome}=req.params
-    res.redirect(`/frontend/formacao.html?nome=${nome}`)
+    res.redirect(`formacao.html?nome=${nome}`)
 }) 
 app.get('/contatos/:id',(req,res)=>{
     const{id}=req.params
