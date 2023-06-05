@@ -1,0 +1,21 @@
+/*desktops*/
+@media  screen and (max-width:1128px){
+    .w-50{
+        width: 50% !important;
+
+    }
+}
+/*tablets*/
+@media  screen and (max-width:768px){
+    .w-50{
+        width: 70% !important;
+
+    }
+}
+/*celiulares*/
+@media  screen and (max-width:520px){
+    .w-50{
+        width: 85% !important;
+
+    }
+}
